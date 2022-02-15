@@ -6,11 +6,13 @@ export class Habit extends Component {
   };
 
   handleIncrement = () => {
+    // state 오브젝트 안에 있는 count를 증가 한뒤, statr를 업데이트 해야함.
     this.setState({ count: this.state.count +1});
   }
 
   handleDecrement = () => {
-    this.setState({ count: this.state.count -1});
+    const count = this.state.count - 1;
+    this.setState({ count: count < 0 ? 0 : count });
   }
 
   render() {
