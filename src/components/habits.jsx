@@ -1,37 +1,46 @@
 import React, { Component } from 'react'
 import Habit from './habit'
 
-export class Habits extends Component {
+class Habits extends Component {
   state = {
     habits: [
-      {name : 'Reading', count: 0},
-      {name : 'Running', count: 0},
-      {name : 'Coding', count: 0},
-    ]
+      { id: 1, name: 'Reading', count: 0 },
+      { id: 2, name: 'Running', count: 0 },
+      { id: 3, name: 'Coding', count: 0 },
+    ],
   };
 
   handleIncrement = (habit) => {
-    console.log(`handleIncrement ${habit.name}`);
-  }
+    // state 깊은 복사 후, 클릭한 habit의 index 번호를 찾아서 해당 index 번호의 habits 카운터 증가
+    const habits = [...this.state.habits] 
+    const index = habits.indexOf(habit) 
+    habits[index].count++
+    this.setState({ habits }) // { habits : habits } => key : value 축약
+  };
 
   handleDecrement = (habit) => {
-    console.log(`handleDecrement ${habit.name}`);
-  }
+    const habits = [...this.state.habits] 
+    const index = habits.indexOf(habit) 
+    const count = habits[index].count - 1;
+    habits[index].count = count < 0 ? 0 : count;
+    this.setState({ habits }) // { habits : habits }
+  };
 
-  handleDelete = (habit) => {
-    console.log(`handleDelete ${habit.name}`);
-  }
+  handleDelete = habit => {
+    const habits = this.state.habits.filter(item => item.id !== habit.id);
+    this.setState({ habits });
+  };
 
   render() {
     return (
       <ul>
-        {this.state.habits.map((habit, index) => (
+        {this.state.habits.map(habit => (
           <Habit 
-          habit={habit} 
-          key={index}
-          onIncrement={this.handleIncrement}
-          onDecrement={this.handleDecrement}
-          onDelete={this.handleDelete}
+            key={habit.id}
+            habit={habit} 
+            onIncrement={this.handleIncrement}
+            onDecrement={this.handleDecrement}
+            onDelete={this.handleDelete}
           />
         ))}
       </ul>
