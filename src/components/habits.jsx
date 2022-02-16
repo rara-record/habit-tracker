@@ -2,39 +2,22 @@ import React, { Component } from 'react'
 import Habit from './habit'
 
 class Habits extends Component {
-  state = {
-    habits: [
-      { id: 1, name: 'Reading', count: 0 },
-      { id: 2, name: 'Running', count: 0 },
-      { id: 3, name: 'Coding', count: 0 },
-    ],
-  };
-
   handleIncrement = (habit) => {
-    // state 깊은 복사 후, 클릭한 habit의 index 번호를 찾아서 해당 index 번호의 habits 카운터 증가
-    const habits = [...this.state.habits] 
-    const index = habits.indexOf(habit) 
-    habits[index].count++
-    this.setState({ habits }) // { habits : habits } => key : value 축약
+    this.props.onIncrement(habit)
   };
 
   handleDecrement = (habit) => {
-    const habits = [...this.state.habits] 
-    const index = habits.indexOf(habit) 
-    const count = habits[index].count - 1;
-    habits[index].count = count < 0 ? 0 : count;
-    this.setState({ habits }) // { habits : habits }
+    this.props.onDecrement(habit)
   };
 
   handleDelete = habit => {
-    const habits = this.state.habits.filter(item => item.id !== habit.id);
-    this.setState({ habits });
+    this.props.onDelete(habit)
   };
 
   render() {
     return (
       <ul>
-        {this.state.habits.map(habit => (
+        {this.props.habits.map(habit => (
           <Habit 
             key={habit.id}
             habit={habit} 
