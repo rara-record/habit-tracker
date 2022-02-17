@@ -1,10 +1,10 @@
 import React, { memo } from 'react';
 
-const HabitAddForm = memo((props) => {
+const HabitAddForm = memo(props => {
   const formRef = React.createRef();
   const inputRef = React.createRef();
 
-  const onSubmit = (event) => {
+  const onSubmit = event => {
     event.preventDefault();
     // input에 value를 받아서, value가 있다면 onAdd에 value를 담아서 호출함.
     const name = inputRef.current.value;
