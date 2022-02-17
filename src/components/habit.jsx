@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 
-class Habit extends Component {
+class Habit extends PureComponent {
   handleIncrement = () => {
     this.props.onIncrement(this.props.habit);
   };
@@ -43,3 +43,7 @@ class Habit extends Component {
 }
 
 export default Habit;
+
+// PureComponent 후 동작되지 않는 근본적인 문제
+// app.js에서 오브젝트 '전체'를 업데이트 하지 않고, 오브젝트 '안에 있는 데이터'를 변경해서 일어남.
+// (props가 변경되지 않았기 때문에, 동일한 레퍼런스로 간주 즉, 변화가 없다고 판단)
