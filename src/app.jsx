@@ -13,17 +13,24 @@ class App extends Component {
   };
 
   handleIncrement = habit => {
-    const habits = [...this.state.habits];
-    const index = habits.indexOf(habit);
-    habits[index].count++; // 오브젝트 안에서 데이터 변경
+    // 기존 state 리스트와 내가 선택한 리스트가 같다면, 기존 state 깊은 복사 후, '변경 될 부분을 덮어 씌워서' 새로운 배열로 만들어서 업데이트 한다.
+    const habits = this.state.habits.map(item => {
+      if (item.id === habit.id) {
+        return { ...habit, count: habit.count + 1 };
+      }
+      return item;
+    });
     this.setState({ habits });
   };
 
   handleDecrement = habit => {
-    const habits = [...this.state.habits];
-    const index = habits.indexOf(habit);
-    const count = habits[index].count - 1;
-    habits[index].count = count < 0 ? 0 : count;
+    const habits = this.state.habits.map(item => {
+      if (item.id === habit.id) {
+        const count = habit.count - 1;
+        return { ...habit, count: count < 0 ? 0 : count };
+      }
+      return item;
+    });
     this.setState({ habits });
   };
 
@@ -41,9 +48,12 @@ class App extends Component {
   };
 
   handleReset = () => {
-    const habits = this.state.habits.map(habit => {
-      habit.count = 0;
-      return habit; // return 빼먹지 않기.
+    const habits = this.state.habits.map(item => {
+      // 이미 0인 habit은 업데이트를 하지 않기 않고 리셋한다.
+      if (item.count !== 0) {
+        return { ...item, count: 0 };
+      }
+      return item;
     });
     this.setState({ habits });
   };
