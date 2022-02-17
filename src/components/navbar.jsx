@@ -4,10 +4,8 @@ class Navbar extends PureComponent {
   render() {
     return (
       <header className="navbar">
-        <h1 className="navbar-logo">
-          <i className="fas fa-leaf"></i>
-        </h1>
-        <h2 className="navbar-title">Habit Tracker</h2>
+        <i className="navbar-logo fas fa-leaf"></i>
+        <span className="navbar-title">Habit Tracker</span>
         <span className="navbar-count">{this.props.totalCount}</span>
       </header>
     );
