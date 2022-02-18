@@ -3,7 +3,7 @@ import React, { useCallback, useState } from 'react';
 import Navbar from './components/navbar';
 import Habits from './components/habits';
 
-export const App = () => {
+const App = () => {
   const [habits, setHabits] = useState([
     { id: 1, name: 'Reading', count: 0 },
     { id: 2, name: 'Running', count: 0 },
@@ -45,7 +45,7 @@ export const App = () => {
   const handleReset = useCallback(() => {
     setHabits(habits =>
       habits.map(habit => {
-        if (habit.count != 0) {
+        if (habit.count !== 0) {
           return { ...habit, count: 0 };
         }
         return habit;

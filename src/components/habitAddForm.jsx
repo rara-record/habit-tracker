@@ -25,4 +25,5 @@ const HabitAddForm = memo(props => {
   );
 });
 
+HabitAddForm.displayName = 'HabitAddForm';
 export default HabitAddForm;

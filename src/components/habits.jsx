@@ -2,7 +2,7 @@ import React from 'react';
 import HabitAddForm from './habitAddForm';
 import Habit from './habit';
 
-export const Habits = ({
+const Habits = ({
   habits,
   onIncrement,
   onDecrement,
@@ -31,4 +31,5 @@ export const Habits = ({
   );
 };
 
+Habits.displayName = 'Habits';
 export default Habits;
