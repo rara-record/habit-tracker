@@ -18,9 +18,6 @@
   },
   "plugins": ["react", "@typescript-eslint"],
   "rules": {
-    "react/prop-types": [
-      "enabled",
-      { "ignore": "ignore", "customValidators": "customValidator" }
-    ]
+    "react/prop-types": "off"
   }
 }
